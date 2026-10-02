@@ -1,7 +1,7 @@
 // Weekly digest: emails Kit subscribers everything published on DesignersDream in the last 7 days.
 // Runs from GitHub Actions every Monday. Needs the KIT_API_KEY secret; does nothing without it.
 const SITE = (process.env.SITE_URL || "https://designersdream.pages.dev").replace(/\/$/, "");
-const KEY = process.env.KIT_API_KEY;
+const KEY = (process.env.KIT_API_KEY || "").trim();
 const DRY = process.env.DRY_RUN === "1";
 
 if (!KEY && !DRY) {
@@ -67,6 +67,7 @@ const res = await fetch("https://api.kit.com/v4/broadcasts", {
 const text = await res.text();
 if (!res.ok) {
   console.error(`Kit refused the broadcast (${res.status}): ${text}`);
+  if (res.status === 401) console.error("Check that KIT_API_KEY holds a V4 key (it starts with kit_), not the legacy V3 key or secret.");
   process.exit(1);
 }
 console.log(`Scheduled the weekly email with ${fresh.length} items.`);
