@@ -35,7 +35,14 @@ export default function Subscribe({ variant = "band" }: { variant?: "band" | "in
         body,
         headers: { Accept: "application/json" },
       });
-      if (!res.ok) throw new Error(String(res.status));
+      // Kit answers 200 even when it rejects an address, so read its status field.
+      const data = (await res.json().catch(() => ({}))) as { status?: string; errors?: { messages?: string[] } };
+      if (!res.ok || data.status !== "success") {
+        const msg = data.errors?.messages?.find((m) => /email/i.test(m));
+        setState("error");
+        setError(msg ? `${msg}. Check the address and try again.` : "That didn't go through. Try again in a moment.");
+        return;
+      }
       setState("done");
     } catch {
       setState("error");

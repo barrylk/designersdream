@@ -27,7 +27,7 @@ export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "nirmala.i
  * Email subscriptions run on Kit (kit.com, free up to 10,000 subscribers).
  * Paste the numeric ID of your Kit form below, or set NEXT_PUBLIC_KIT_FORM_ID in Cloudflare.
  */
-const KIT_FORM = "";
+const KIT_FORM = "9992044";
 export const KIT_FORM_ID = (process.env.NEXT_PUBLIC_KIT_FORM_ID || KIT_FORM).trim();
 export const SUBSCRIBE_ENABLED = /^\d+$/.test(KIT_FORM_ID);
 
