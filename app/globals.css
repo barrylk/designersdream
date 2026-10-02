@@ -1617,3 +1617,22 @@ a.chip:hover {
 .card .cover-tag {
   display: none;
 }
+
+/* ───────── Illustrated covers */
+.cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card .cover-img {
+  transition: transform 0.8s var(--ease-out);
+}
+.card:hover .cover-img {
+  transform: scale(1.04);
+}
+.cover-photo .cover-grain {
+  opacity: 0.12;
+}

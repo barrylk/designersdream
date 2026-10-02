@@ -226,6 +226,29 @@ export default function Cover({ item, className = "", large = false }: { item: I
     return <rect transform={`rotate(${f.rot / 6 - 8} ${f.x} ${f.y})`} x={f.x - f.s / 2} y={f.y - f.s / 3} width={f.s} height={(f.s * 2) / 3} rx="24" fill={fill} {...extra} />;
   };
 
+  if (item.image) {
+    const base = item.image.src.replace(/\.webp$/, "");
+    return (
+      <div className={`cover cover-photo ${className}`}>
+        <img
+          className="cover-img"
+          src={large ? `${base}.webp` : `${base}-800.webp`}
+          srcSet={`${base}-800.webp 800w, ${base}.webp 1440w`}
+          sizes={large ? "(max-width: 900px) 100vw, 1320px" : "(max-width: 640px) 100vw, 420px"}
+          alt={item.image.alt}
+          loading={large ? "eager" : "lazy"}
+          decoding="async"
+        />
+        <span className="cover-tag">
+          <span className="cover-dot" style={{ background: colors[0] }} />
+          {t.singular}
+        </span>
+        <span className="cover-date">{formatDate(item.date)}</span>
+        <span className="cover-grain" />
+      </div>
+    );
+  }
+
   return (
     <div className={`cover ${className}`} aria-hidden="true">
       <svg className="cover-art" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">

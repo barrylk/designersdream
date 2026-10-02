@@ -46,6 +46,8 @@ export type Item = {
   date: string; // ISO date published on DesignersDream
   featured?: boolean;
   readMins?: number;
+  /** Original cover art in /public/art (generated for us, no third-party photos). */
+  image?: { src: string; alt: string };
   /** Byline. Articles and news default to Barry. */
   author?: "barry";
   /** Outlets we learned the story from; always credited and linked on the page. */

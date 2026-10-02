@@ -9,6 +9,7 @@ export const NEWS: Item[] = [
   {
     type: "news",
     slug: "the-last-museum-art-search-engine",
+    image: { src: "/art/the-last-museum-art-search-engine.webp", alt: "Illustration of framed artworks floating in a glowing grid around a search bar" },
     title: "The Last Museum lets you search six million artworks by mood",
     excerpt: "A free search engine that understands plain descriptions like ‘japanese woodblock print of birds’ just became the best reference board on the internet.",
     disciplines: ["graphic", "brand", "3d"],
@@ -36,6 +37,7 @@ export const NEWS: Item[] = [
   {
     type: "news",
     slug: "three-small-tools-pigment-smol-avellio",
+    image: { src: "/art/three-small-tools-pigment-smol-avellio.webp", alt: "Illustration of a colour swatch fan, a vice squeezing files and a magnifying glass over type" },
     title: "Three small tools worth a look this month",
     excerpt: "A free palette generator, a local file squeezer for Mac and a typography checker for InDesign. None of them need a subscription to be useful.",
     disciplines: ["graphic", "web", "brand"],
@@ -58,6 +60,7 @@ export const NEWS: Item[] = [
   {
     type: "news",
     slug: "vauxhall-griffin-logo-drops-flag",
+    image: { src: "/art/vauxhall-griffin-logo-drops-flag.webp", alt: "Illustration of a glowing griffin badge on the grille of an electric car at night" },
     title: "Vauxhall's griffin loses its flag for the first time in 121 years",
     excerpt: "The British carmaker has flattened and sharpened its emblem again, this time so it reads clearly when it lights up on electric cars.",
     disciplines: ["brand", "graphic"],
@@ -82,6 +85,7 @@ export const NEWS: Item[] = [
   {
     type: "news",
     slug: "moma-full-disclosure-information-design",
+    image: { src: "/art/moma-full-disclosure-information-design.webp", alt: "Illustration of a museum visitor looking at data postcards, a large map and dreamlike memory images" },
     title: "MoMA's new show asks what information design looks like in the AI era",
     excerpt: "Full Disclosure runs until June 2027 and puts handmade data postcards next to AI images generated from people's memories.",
     disciplines: ["graphic", "ui-ux"],
@@ -106,6 +110,7 @@ export const NEWS: Item[] = [
   {
     type: "news",
     slug: "adobe-max-2026-miami-beach-dates",
+    image: { src: "/art/adobe-max-2026-miami-beach-dates.webp", alt: "Illustration of a night-time conference stage among palm trees and art deco buildings" },
     title: "Adobe MAX 2026 is set for Miami Beach, 10 to 12 November",
     excerpt: "Adobe's big creative conference returns in November, in person and online. Here's what we know so far and how to follow along.",
     disciplines: ["graphic", "motion", "brand", "ui-ux"],
@@ -230,6 +235,7 @@ export const NEWS: Item[] = [
   {
     type: "news",
     slug: "figma-nested-folders-ai-credit-limits",
+    image: { src: "/art/figma-nested-folders-ai-credit-limits.webp", alt: "Illustration of colourful folders nested inside each other, many layers deep" },
     title: "Figma projects become nested folders, ten levels deep",
     excerpt: "Teams can finally organise files the way they think, and admins get per-person limits on AI credits.",
     disciplines: ["ui-ux", "web"],
