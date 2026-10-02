@@ -5,6 +5,8 @@ import DropsRail from "@/components/DropsRail";
 import Reveal from "@/components/Reveal";
 import ContentCard from "@/components/ContentCard";
 import Cover from "@/components/Cover";
+import AdSlot from "@/components/AdSlot";
+import { ADSENSE_SLOTS } from "@/lib/site";
 import {
   DISCIPLINES,
   disciplineByKey,
@@ -12,15 +14,19 @@ import {
   itemsOfDiscipline,
   itemsOfType,
   latest,
+  formatDate,
 } from "@/lib/content";
 
 export default function Home() {
+  const news = itemsOfType("news");
+  const lead = news.find((n) => n.featured) ?? news[0];
+  const headlines = news.filter((n) => n !== lead).slice(0, 5);
   const tools = [...itemsOfType("software"), ...itemsOfType("ai-model")].map((i) => ({
     label: i.title,
     kind: i.type === "software" ? "software" : "AI model",
     color: disciplineByKey(i.disciplines[0]).color,
   }));
-  const drops = latest(9);
+  const drops = latest(9, ["news"]);
   const articles = itemsOfType("article");
   const feature = articles.find((a) => a.featured) ?? articles[0];
   const tips = itemsOfType("tip").slice(0, 5);
@@ -31,6 +37,51 @@ export default function Home() {
     <>
       <Hero />
       <Ticker entries={tools} />
+
+      {/* News desk */}
+      <section className="section news-desk" aria-labelledby="news-title">
+        <div className="wrap">
+          <Reveal className="section-head">
+            <div>
+              <h2 id="news-title" className="section-title" data-reveal>
+                The news desk
+              </h2>
+              <p className="section-sub">What happened in design this week, rewritten in plain words by Barry. Every story links to its source.</p>
+            </div>
+            <Link href="/news/" className="link-more">
+              All news
+            </Link>
+          </Reveal>
+          <div className="desk">
+            <Link href={itemHref(lead)} className="desk-lead">
+              <Cover item={lead} className="desk-cover" large />
+              <span className="desk-meta">
+                {formatDate(lead.date)} · via {lead.sources?.[0]?.name}
+              </span>
+              <h3 className="desk-title">{lead.title}</h3>
+              <p className="desk-excerpt">{lead.excerpt}</p>
+              <span className="desk-by">By Barry</span>
+            </Link>
+            <ol className="desk-list">
+              {headlines.map((n) => (
+                <li key={n.slug}>
+                  <Link href={itemHref(n)}>
+                    <span className="desk-meta">
+                      <span className="dots">
+                        {n.disciplines.slice(0, 3).map((d) => (
+                          <span key={d} className="dot" style={{ ["--c" as string]: disciplineByKey(d).color }} />
+                        ))}
+                      </span>
+                      {formatDate(n.date)} · via {n.sources?.[0]?.name}
+                    </span>
+                    <span className="desk-headline">{n.title}</span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
 
       {/* Disciplines as ink swatches */}
       <section className="section" aria-labelledby="disc-title">
@@ -136,6 +187,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="wrap">
+        <AdSlot slot={ADSENSE_SLOTS.home} className="ad-block" />
+      </div>
 
       {/* AI model index */}
       <section className="section" aria-labelledby="ai-title" style={{ paddingTop: 0 }}>

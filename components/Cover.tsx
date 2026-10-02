@@ -1,6 +1,7 @@
 import { disciplineByKey, type Item } from "@/lib/content";
 
 const GLYPH: Record<Item["type"], string> = {
+  news: "Nº",
   article: "Aa",
   tip: "✳",
   software: "⌘",
@@ -56,7 +57,7 @@ export default function Cover({ item, className = "", large = false }: { item: I
         />
       ))}
       <span className="cover-glyph" style={large ? { fontSize: "clamp(140px, 22vw, 320px)" } : undefined}>
-        {item.type === "software" || item.type === "ai-model" || item.type === "video" ? item.title.slice(0, 1) : GLYPH[item.type]}
+        {item.type === "software" || item.type === "ai-model" || item.type === "video" || item.type === "news" ? item.title.slice(0, 1) : GLYPH[item.type]}
       </span>
       <span className="cover-grain" />
     </div>

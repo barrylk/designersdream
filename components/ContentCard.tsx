@@ -5,7 +5,7 @@ import Cover from "./Cover";
 export default function ContentCard({ item }: { item: Item }) {
   const t = typeByKey(item.type);
   const detail =
-    item.type === "article" && item.readMins
+    (item.type === "article" || item.type === "news") && item.readMins
       ? `${item.readMins} min read`
       : item.meta?.modality ?? item.meta?.pricing ?? item.meta?.tool ?? item.meta?.handle ?? formatDate(item.date);
 

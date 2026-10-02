@@ -1,4 +1,6 @@
-export type TypeKey = "article" | "tip" | "software" | "ai-model" | "video";
+import { NEWS } from "./news";
+
+export type TypeKey = "news" | "article" | "tip" | "software" | "ai-model" | "video";
 export type DisciplineKey = "ui-ux" | "graphic" | "motion" | "3d" | "web" | "brand";
 
 export type Discipline = {
@@ -23,6 +25,7 @@ export const disciplineByKey = (k: DisciplineKey) => DISCIPLINES.find((d) => d.k
 export type TypeInfo = { key: TypeKey; route: string; name: string; singular: string; intro: string };
 
 export const TYPES: TypeInfo[] = [
+  { key: "news", route: "news", name: "News", singular: "News", intro: "What shipped, what changed and why it matters to designers, rewritten in plain words with a link to every original report." },
   { key: "article", route: "articles", name: "Articles", singular: "Article", intro: "Longer reads on craft, process and the tools changing both." },
   { key: "tip", route: "tips", name: "Tips & tricks", singular: "Tip", intro: "Small habits and shortcuts you can use in the next five minutes." },
   { key: "software", route: "software", name: "Software", singular: "Software", intro: "Design tools worth a look, from open-source staples to newer apps." },
@@ -42,6 +45,10 @@ export type Item = {
   date: string; // ISO date published on DesignersDream
   featured?: boolean;
   readMins?: number;
+  /** Byline. Articles and news default to Barry. */
+  author?: "barry";
+  /** Outlets we learned the story from; always credited and linked on the page. */
+  sources?: { name: string; url: string }[];
   /** Paragraphs. A line starting "## " is a heading, "- " a list item, "1. " a step. */
   body?: string[];
   meta?: {
@@ -56,7 +63,8 @@ export type Item = {
   };
 };
 
-export const ITEMS: Item[] = [
+const RAW_ITEMS: Item[] = [
+  ...NEWS,
   // ───────────────────────── Articles
   {
     type: "article",
@@ -668,10 +676,16 @@ export const ITEMS: Item[] = [
   },
 ];
 
-export const byDate = (a: Item, b: Item) => (a.date < b.date ? 1 : -1);
+/** Everything written in-house carries Barry's byline. */
+export const ITEMS: Item[] = RAW_ITEMS.map((i) =>
+  i.type === "article" || i.type === "news" ? { ...i, author: i.author ?? "barry" } : i,
+);
+
+export const byDate = (a: Item, b: Item) => b.date.localeCompare(a.date);
 export const itemsOfType = (t: TypeKey) => ITEMS.filter((i) => i.type === t).sort(byDate);
 export const itemsOfDiscipline = (d: DisciplineKey) => ITEMS.filter((i) => i.disciplines.includes(d)).sort(byDate);
-export const latest = (n: number) => [...ITEMS].sort(byDate).slice(0, n);
+export const latest = (n: number, exclude: TypeKey[] = []) =>
+  ITEMS.filter((i) => !exclude.includes(i.type)).sort(byDate).slice(0, n);
 export const itemHref = (i: Item) => `/${typeByKey(i.type).route}/${i.slug}/`;
 export const findItem = (route: string, slug: string) => {
   const t = typeByRoute(route);

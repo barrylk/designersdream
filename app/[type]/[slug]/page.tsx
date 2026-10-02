@@ -5,6 +5,8 @@ import Cover from "@/components/Cover";
 import ContentCard from "@/components/ContentCard";
 import ReadingProgress from "@/components/ReadingProgress";
 import Reveal from "@/components/Reveal";
+import AdSlot from "@/components/AdSlot";
+import { AUTHORS } from "@/lib/authors";
 import {
   ITEMS,
   byDate,
@@ -15,7 +17,7 @@ import {
   typeByRoute,
   type Item,
 } from "@/lib/content";
-import { SITE_URL } from "@/lib/site";
+import { ADSENSE_SLOTS, SITE_URL } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -36,7 +38,8 @@ export async function generateMetadata({ params }: { params: Promise<{ type: str
 }
 
 /** Tiny renderer for our body format: "## " headings, "- " bullets, "1. " steps, else paragraphs. */
-function Body({ lines }: { lines: string[] }) {
+function Body({ lines, adAfter = 0 }: { lines: string[]; adAfter?: number }) {
+  let paragraphs = 0;
   const out: React.ReactNode[] = [];
   let list: { kind: "ul" | "ol"; items: string[] } | null = null;
   const flush = () => {
@@ -65,7 +68,11 @@ function Body({ lines }: { lines: string[] }) {
     }
     flush();
     if (line.startsWith("## ")) out.push(<h2 key={out.length}>{line.slice(3)}</h2>);
-    else out.push(<p key={out.length}>{line}</p>);
+    else {
+      out.push(<p key={out.length}>{line}</p>);
+      paragraphs++;
+      if (paragraphs === adAfter) out.push(<AdSlot key="ad" slot={ADSENSE_SLOTS.inArticle} className="ad-inline" />);
+    }
   }
   flush();
   return <>{out}</>;
@@ -122,16 +129,27 @@ export default async function DetailPage({ params }: { params: Promise<{ type: s
     .sort(byDate)
     .slice(0, 3);
 
+  const author = item.author ? AUTHORS[item.author] : undefined;
   const jsonLd =
-    item.type === "article"
-      ? { "@context": "https://schema.org", "@type": "Article", headline: item.title, description: item.excerpt, datePublished: item.date, url: `${SITE_URL}/${type}/${slug}/` }
+    item.type === "article" || item.type === "news"
+      ? {
+          "@context": "https://schema.org",
+          "@type": item.type === "news" ? "NewsArticle" : "Article",
+          headline: item.title,
+          description: item.excerpt,
+          datePublished: item.date,
+          url: `${SITE_URL}/${type}/${slug}/`,
+          ...(author ? { author: { "@type": "Person", name: author.name, url: `${SITE_URL}/author/${author.key}/` } } : {}),
+          publisher: { "@type": "Organization", name: "DesignersDream" },
+          ...(item.sources?.length ? { isBasedOn: item.sources.map((x) => x.url) } : {}),
+        }
       : item.type === "software"
         ? { "@context": "https://schema.org", "@type": "SoftwareApplication", name: item.title, description: item.excerpt, applicationCategory: "DesignApplication", url: item.meta?.url }
         : { "@context": "https://schema.org", "@type": "WebPage", name: item.title, description: item.excerpt };
 
   return (
     <article>
-      {item.type === "article" && <ReadingProgress />}
+      {(item.type === "article" || item.type === "news") && <ReadingProgress />}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="wrap detail-hero">
         <nav className="crumbs" aria-label="Breadcrumb">
@@ -140,16 +158,49 @@ export default async function DetailPage({ params }: { params: Promise<{ type: s
           <span aria-current="page">{item.title}</span>
         </nav>
         <Reveal>
-          <h1 className="detail-title" data-reveal>
+          <h1 className={`detail-title${item.title.length > 38 ? " detail-title-long" : ""}`} data-reveal>
             {item.title}
           </h1>
         </Reveal>
         <p className="detail-lede">{item.excerpt}</p>
+        {author && (
+          <div className="byline">
+            <Link href={`/author/${author.key}/`} className="byline-author">
+              <span className="author-avatar" aria-hidden="true">
+                {author.initial}
+              </span>
+              <span>
+                <span className="byline-name">By {author.name}</span>
+                <span className="byline-meta">
+                  {formatDate(item.date)}
+                  {item.readMins ? ` · ${item.readMins} min read` : ""}
+                </span>
+              </span>
+            </Link>
+          </div>
+        )}
         <Cover item={item} className="detail-cover" large />
         <div className="detail-layout">
           <Facts item={item} />
           <div className="prose" id="article-body">
-            <Body lines={item.body ?? []} />
+            <Body lines={item.body ?? []} adAfter={item.type === "article" || item.type === "news" ? 2 : 0} />
+            {item.sources && item.sources.length > 0 && (
+              <section className="sources" aria-labelledby="sources-title">
+                <h2 id="sources-title">Sources</h2>
+                <p>
+                  {item.type === "news" ? "This story is our summary of reporting by " : "Further reading from "}
+                  {item.sources.map((src, i) => (
+                    <span key={src.url}>
+                      {i > 0 && (i === item.sources!.length - 1 ? " and " : ", ")}
+                      <a href={src.url} target="_blank" rel="noopener noreferrer">
+                        {src.name}
+                      </a>
+                    </span>
+                  ))}
+                  . Read the original for full detail.
+                </p>
+              </section>
+            )}
             {item.meta?.url && item.type === "video" && (
               <p>
                 <a className="btn" href={item.meta.url} target="_blank" rel="noopener noreferrer">

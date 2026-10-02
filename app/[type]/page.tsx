@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ListingGrid from "@/components/ListingGrid";
 import Reveal from "@/components/Reveal";
+import AdSlot from "@/components/AdSlot";
+import { ADSENSE_SLOTS } from "@/lib/site";
 import { TYPES, itemsOfType, typeByRoute } from "@/lib/content";
 
 export const dynamicParams = false;
 
 const AURA: Record<string, string> = {
+  news: "#39D5F0",
   articles: "#FF3FA4",
   tips: "#FFD43B",
   software: "#39D5F0",
@@ -45,6 +48,7 @@ export default async function ListingPage({ params }: { params: Promise<{ type: 
       </header>
       <div className="wrap">
         <ListingGrid items={items} />
+        <AdSlot slot={ADSENSE_SLOTS.listing} className="ad-block" />
       </div>
     </>
   );

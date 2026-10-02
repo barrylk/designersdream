@@ -32,6 +32,12 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+        <nav className="footer-pages" aria-label="About this site">
+          <Link href="/about/">About</Link>
+          <Link href="/author/barry/">Barry, our editor</Link>
+          <Link href="/contact/">Contact</Link>
+          <Link href="/privacy/">Privacy policy</Link>
+        </nav>
         <div className="wordmark" aria-hidden="true">
           DesignersDream
         </div>

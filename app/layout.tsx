@@ -5,7 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CommandSearch, { type SearchEntry } from "@/components/CommandSearch";
 import { ITEMS, byDate, disciplineByKey, itemHref, typeByKey } from "@/lib/content";
-import { SITE_URL } from "@/lib/site";
+import { ADSENSE_CLIENT, ADSENSE_ENABLED, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     "Articles, quick tips, new design software, AI models and video channels for UI/UX, graphic, motion, 3D, web and brand designers.",
   openGraph: { type: "website", siteName: "DesignersDream", url: SITE_URL },
   twitter: { card: "summary_large_image" },
+  ...(ADSENSE_ENABLED ? { other: { "google-adsense-account": ADSENSE_CLIENT } } : {}),
 };
 
 export const viewport: Viewport = { themeColor: "#0d1030", colorScheme: "dark" };
@@ -39,6 +40,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js-motion')`,
           }}
         />
+        {ADSENSE_ENABLED && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       <body>
         <a className="skip" href="#main">
