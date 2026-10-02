@@ -6,6 +6,8 @@ import ContentCard from "@/components/ContentCard";
 import ReadingProgress from "@/components/ReadingProgress";
 import Reveal from "@/components/Reveal";
 import AdSlot from "@/components/AdSlot";
+import VideoPlayer from "@/components/VideoPlayer";
+import Subscribe from "@/components/Subscribe";
 import { AUTHORS } from "@/lib/authors";
 import {
   ITEMS,
@@ -179,7 +181,13 @@ export default async function DetailPage({ params }: { params: Promise<{ type: s
             </Link>
           </div>
         )}
-        <Cover item={item} className="detail-cover" large />
+        {item.meta?.youtubeId ? (
+          <VideoPlayer id={item.meta.youtubeId} title={item.title}>
+            <Cover item={item} className="detail-cover" large />
+          </VideoPlayer>
+        ) : (
+          <Cover item={item} className="detail-cover" large />
+        )}
         <div className="detail-layout">
           <Facts item={item} />
           <div className="prose" id="article-body">
@@ -210,6 +218,7 @@ export default async function DetailPage({ params }: { params: Promise<{ type: s
             )}
           </div>
         </div>
+        <Subscribe variant="inline" />
         {related.length > 0 && (
           <section className="related" aria-labelledby="related-title">
             <div className="section-head">

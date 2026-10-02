@@ -15,8 +15,18 @@ export default function PrivacyPage() {
     <TextPage title="Privacy policy" intro={`How this site and its advertising partners use your data. Last updated ${UPDATED}.`} color="#8C7BFF">
       <h2>What we collect</h2>
       <p>
-        DesignersDream has no accounts and no sign-up forms. We don't ask for your name or email. Our hosting provider, Cloudflare,
-        processes basic technical data such as your IP address and browser type to deliver pages and protect the site from abuse.
+        DesignersDream has no accounts. The only personal data we ask for is your email address, and only if you choose to subscribe.
+        Our hosting provider, Cloudflare, processes basic technical data such as your IP address and browser type to deliver pages and
+        protect the site from abuse.
+      </p>
+      <h2>Email subscriptions</h2>
+      <p>
+        If you subscribe, your email address is stored by our email provider,{" "}
+        <a href="https://kit.com/privacy" target="_blank" rel="noopener noreferrer">
+          Kit
+        </a>
+        , and used only to send the DesignersDream weekly email. You'll be asked to confirm your address first. Every email has an
+        unsubscribe link, and we never sell or share your address.
       </p>
       <h2>Advertising and cookies</h2>
       <p>We use Google AdSense to show ads. This is how that works:</p>

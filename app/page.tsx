@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import ContentCard from "@/components/ContentCard";
 import Cover from "@/components/Cover";
 import AdSlot from "@/components/AdSlot";
+import Subscribe from "@/components/Subscribe";
 import { ADSENSE_SLOTS } from "@/lib/site";
 import {
   DISCIPLINES,
@@ -266,6 +267,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="wrap">
+        <Subscribe variant="band" />
+      </div>
 
       <section className="closer" aria-labelledby="closer-title">
         <div className="wrap">

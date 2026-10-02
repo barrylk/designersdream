@@ -1,4 +1,5 @@
 import { NEWS } from "./news";
+import { PATCHES, UPDATES } from "./updates";
 
 export type TypeKey = "news" | "article" | "tip" | "software" | "ai-model" | "video";
 export type DisciplineKey = "ui-ux" | "graphic" | "motion" | "3d" | "web" | "brand";
@@ -30,7 +31,7 @@ export const TYPES: TypeInfo[] = [
   { key: "tip", route: "tips", name: "Tips & tricks", singular: "Tip", intro: "Small habits and shortcuts you can use in the next five minutes." },
   { key: "software", route: "software", name: "Software", singular: "Software", intro: "Design tools worth a look, from open-source staples to newer apps." },
   { key: "ai-model", route: "ai-models", name: "AI models", singular: "AI model", intro: "Generators for images, video, vectors and 3D, and what each is good at." },
-  { key: "video", route: "videos", name: "Videos", singular: "Channel", intro: "YouTube channels that teach the craft well, picked by discipline." },
+  { key: "video", route: "videos", name: "Videos", singular: "Video", intro: "This month's must-watch videos and the YouTube channels that teach the craft well." },
 ];
 
 export const typeByKey = (k: TypeKey) => TYPES.find((t) => t.key === k)!;
@@ -60,11 +61,14 @@ export type Item = {
     linkLabel?: string;
     tool?: string;
     handle?: string;
+    /** YouTube video ID for single videos (channels leave this empty). */
+    youtubeId?: string;
   };
 };
 
 const RAW_ITEMS: Item[] = [
   ...NEWS,
+  ...UPDATES,
   // ───────────────────────── Articles
   {
     type: "article",
@@ -677,9 +681,11 @@ const RAW_ITEMS: Item[] = [
 ];
 
 /** Everything written in-house carries Barry's byline. */
-export const ITEMS: Item[] = RAW_ITEMS.map((i) =>
-  i.type === "article" || i.type === "news" ? { ...i, author: i.author ?? "barry" } : i,
-);
+export const ITEMS: Item[] = RAW_ITEMS.map((raw) => {
+  const p = PATCHES[raw.slug];
+  const i = p ? { ...raw, date: p.date ?? raw.date, body: [...(raw.body ?? []), ...p.appendBody], sources: [...(raw.sources ?? []), ...p.sources] } : raw;
+  return i.type === "article" || i.type === "news" ? { ...i, author: i.author ?? "barry" } : i;
+});
 
 export const byDate = (a: Item, b: Item) => b.date.localeCompare(a.date);
 export const itemsOfType = (t: TypeKey) => ITEMS.filter((i) => i.type === t).sort(byDate);

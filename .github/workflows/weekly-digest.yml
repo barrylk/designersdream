@@ -1,0 +1,21 @@
+name: Weekly email digest
+
+on:
+  schedule:
+    # Mondays 03:30 UTC = 09:00 in Sri Lanka
+    - cron: "30 3 * * 1"
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Email this week's stories to subscribers
+        run: node scripts/send-digest.mjs
+        env:
+          KIT_API_KEY: ${{ secrets.KIT_API_KEY }}
+          SITE_URL: https://designersdream.pages.dev

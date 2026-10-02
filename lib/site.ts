@@ -22,5 +22,13 @@ export const ADSENSE_SLOTS = {
 };
 
 /** Shown on the contact and privacy pages. Leave empty to point people to GitHub instead. */
-export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "";
+export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "nirmala.itdev@proton.me";
+/**
+ * Email subscriptions run on Kit (kit.com, free up to 10,000 subscribers).
+ * Paste the numeric ID of your Kit form below, or set NEXT_PUBLIC_KIT_FORM_ID in Cloudflare.
+ */
+const KIT_FORM = "";
+export const KIT_FORM_ID = (process.env.NEXT_PUBLIC_KIT_FORM_ID || KIT_FORM).trim();
+export const SUBSCRIBE_ENABLED = /^\d+$/.test(KIT_FORM_ID);
+
 export const CONTACT_FALLBACK_URL = "https://github.com/barrylk/designersdream/issues";

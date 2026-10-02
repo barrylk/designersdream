@@ -1397,3 +1397,223 @@ a.chip:hover {
   font-size: clamp(2.2rem, 4.6vw, 4.4rem);
   max-width: 20ch;
 }
+
+/* ───────── Print-shop covers */
+.cover-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.cover-tag,
+.cover-date {
+  position: absolute;
+  z-index: 1;
+  top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font: 600 12px/1 var(--text);
+  color: var(--paper);
+  background: rgba(13, 16, 48, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.cover-tag {
+  left: 14px;
+}
+.cover-date {
+  right: 14px;
+  font-weight: 500;
+  color: var(--mist);
+}
+.cover-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.card .cover-art {
+  transition: transform 0.8s var(--ease-out);
+}
+.card:hover .cover-art {
+  transform: scale(1.04);
+}
+.desk-cover .cover-tag,
+.feature-cover .cover-tag,
+.detail-cover .cover-tag {
+  top: 20px;
+  left: 20px;
+  font-size: 13px;
+}
+.desk-cover .cover-date,
+.feature-cover .cover-date,
+.detail-cover .cover-date {
+  top: 20px;
+  right: 20px;
+  font-size: 13px;
+}
+
+/* ───────── Subscribe */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.subscribe {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 56px);
+  align-items: center;
+  padding: clamp(28px, 5vw, 56px);
+  border-radius: 28px;
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(60% 120% at 0% 0%, rgba(57, 213, 240, 0.18), transparent 60%),
+    radial-gradient(60% 120% at 100% 100%, rgba(255, 63, 164, 0.18), transparent 60%),
+    var(--ink-2);
+  overflow: hidden;
+}
+.subscribe::after {
+  /* halftone corner, echoing the covers */
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background-image: radial-gradient(var(--yellow) 30%, transparent 32%);
+  background-size: 14px 14px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.subscribe-band {
+  margin: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 140px);
+}
+.subscribe-inline {
+  margin: 0 0 clamp(56px, 8vw, 96px);
+}
+.subscribe-title {
+  margin: 0;
+  font: 700 clamp(28px, 3.6vw, 48px)/1 var(--display);
+  letter-spacing: -0.03em;
+}
+.subscribe-inline .subscribe-title {
+  font-size: clamp(24px, 2.6vw, 34px);
+}
+.subscribe-sub {
+  margin: 12px 0 0;
+  color: var(--mist);
+  max-width: 44ch;
+}
+.subscribe-form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.subscribe-form input {
+  flex: 1 1 220px;
+  height: 52px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(13, 16, 48, 0.6);
+  color: var(--paper);
+  font: 500 16px/1 var(--text);
+}
+.subscribe-form input::placeholder {
+  color: var(--mist);
+}
+.subscribe-form input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(57, 213, 240, 0.25);
+}
+.subscribe-form input[aria-invalid="true"] {
+  border-color: var(--magenta);
+}
+.subscribe-form .btn[disabled] {
+  opacity: 0.7;
+  cursor: progress;
+}
+.subscribe-error {
+  flex-basis: 100%;
+  margin: 2px 0 0 20px;
+  color: #ff8cc6;
+  font-size: 14px;
+}
+.subscribe-done {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: rgba(91, 227, 160, 0.12);
+  border: 1px solid rgba(91, 227, 160, 0.4);
+}
+@media (max-width: 820px) {
+  .subscribe {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ───────── Video player */
+.video-player {
+  margin-top: clamp(40px, 6vw, 72px);
+  border-radius: 28px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--ink-2);
+}
+.video-player iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-poster {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+.video-poster .detail-cover {
+  margin: 0;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+.video-play {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 600 15px/1 var(--text);
+  transition: background 0.2s;
+}
+.video-poster:hover .video-play {
+  background: var(--yellow);
+}
+
+/* Cards already state the type under the cover, so only the date shows on the art. */
+.card .cover-tag {
+  display: none;
+}

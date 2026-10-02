@@ -35,6 +35,8 @@ export default function Footer() {
         <nav className="footer-pages" aria-label="About this site">
           <Link href="/about/">About</Link>
           <Link href="/author/barry/">Barry, our editor</Link>
+          <Link href="/subscribe/">Subscribe</Link>
+          <a href="/feed.xml">RSS</a>
           <Link href="/contact/">Contact</Link>
           <Link href="/privacy/">Privacy policy</Link>
         </nav>
