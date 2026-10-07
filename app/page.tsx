@@ -67,6 +67,11 @@ export default function Home() {
               {headlines.map((n) => (
                 <li key={n.slug}>
                   <Link href={itemHref(n)}>
+                    <Cover item={n} className="desk-thumb" />
+                    <span className="desk-text">
+                    <span className="desk-topic" style={{ ["--c" as string]: disciplineByKey(n.disciplines[0]).color }}>
+                      {n.disciplines.slice(0, 2).map((d) => disciplineByKey(d).name).join(" · ")}
+                    </span>
                     <span className="desk-meta">
                       <span className="dots">
                         {n.disciplines.slice(0, 3).map((d) => (
@@ -76,6 +81,7 @@ export default function Home() {
                       {formatDate(n.date)} · via {n.sources?.[0]?.name}
                     </span>
                     <span className="desk-headline">{n.title}</span>
+                    </span>
                   </Link>
                 </li>
               ))}

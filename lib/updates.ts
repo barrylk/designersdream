@@ -5,6 +5,76 @@ import type { Item } from "./content";
  * Each entry ties back to something that just happened and links its sources.
  */
 export const UPDATES: Item[] = [
+  // ───────────────────────── Week of 7 October
+  {
+    type: "tip",
+    slug: "check-cutout-edges",
+    title: "Check a cut-out's edges in 30 seconds",
+    excerpt: "Before trusting any automatic mask, AI or not, run this quick edge check to catch halos and fringing.",
+    disciplines: ["graphic", "brand"],
+    date: "2026-10-07",
+    meta: { tool: "Photoshop" },
+    sources: [{ name: "CG Channel", url: "https://www.cgchannel.com/2026/10/adobe-releases-photoshop-27-11/" }],
+    body: [
+      "1. Add a solid colour fill layer under the cut-out, in a bright colour that clashes with the original background.",
+      "2. Zoom to 200% on the hair or the softest edge.",
+      "3. Switch the fill between bright and near-black. Halos show up against one or the other.",
+      "4. If you see fringing, try Enhance Edge or Decontaminate Colors, then repeat the check.",
+      "Keep the fill layer hidden in the file. The next person to edit it will thank you.",
+    ],
+  },
+  {
+    type: "tip",
+    slug: "limited-palette-oklch",
+    title: "Build a limited palette with OKLCH",
+    excerpt: "Keep lightness steady and change only hue, and your colours will feel like a set instead of a rainbow.",
+    disciplines: ["graphic", "web", "ui-ux"],
+    date: "2026-10-07",
+    meta: { tool: "Any OKLCH picker, CSS" },
+    sources: [{ name: "CG Channel", url: "https://www.cgchannel.com/2026/10/anastasiy-releases-magicpicker-10/" }],
+    body: [
+      "1. Pick one lightness value (L) for your main colours, for example 0.72.",
+      "2. Pick one chroma value (C), for example 0.14.",
+      "3. Change only the hue (H) to get your set: say 30, 150 and 250.",
+      "4. For tints and shades, change only L and keep C and H fixed.",
+      "In CSS that's oklch(0.72 0.14 250). Because OKLCH is perceptual, the colours look equally bright, which plain HSL can't promise.",
+    ],
+  },
+  {
+    type: "software",
+    slug: "magicpicker",
+    title: "MagicPicker",
+    excerpt: "Colour wheel panel for Photoshop and Illustrator. Version 10 adds Colour Areas, OKLCH and native Apple Silicon.",
+    disciplines: ["graphic", "3d"],
+    date: "2026-10-07",
+    meta: { maker: "Anastasiy", platforms: "Photoshop, Illustrator (Windows, macOS)", pricing: "$29", url: "https://blog.anastasiy.com/?p=2484", linkLabel: "Visit Anastasiy" },
+    sources: [{ name: "CG Channel", url: "https://www.cgchannel.com/2026/10/anastasiy-releases-magicpicker-10/" }],
+    body: [
+      "A faster, more visual colour picker for painting and illustration.",
+      "## New in 10",
+      "- Colour Areas for limiting the wheel by region.",
+      "- Oklab and OKLCH colour spaces.",
+      "- Out-of-gamut warnings for print.",
+      "## Best for",
+      "- Digital painters and concept artists who live in Photoshop.",
+    ],
+  },
+  {
+    type: "video",
+    slug: "framestore-dead-city-s3-breakdown",
+    title: "Framestore rebuilds a ruined Manhattan for Dead City",
+    excerpt: "Houdini timelapses of a wrecked Statue of Liberty and Empire State Building, built from 2010 Street View reference.",
+    disciplines: ["3d", "motion"],
+    date: "2026-10-07",
+    featured: true,
+    meta: { maker: "Framestore", handle: "Framestore", youtubeId: "D4glDY4I2hc", url: "https://www.youtube.com/watch?v=D4glDY4I2hc", linkLabel: "Watch on YouTube" },
+    sources: [{ name: "CG Channel", url: "https://www.cgchannel.com/2026/10/see-framestores-detailed-vfx-breakdown-for-dead-city-season-3/" }],
+    body: [
+      "Framestore rebuilt Manhattan as it looked in 2010 using Google Street View, then destroyed it for season 3 of The Walking Dead: Dead City.",
+      "Watch for how the team works like a painter: dense detail where your eye lands, looser impressionistic work everywhere else. It's a lesson in where to spend your time on any big scene.",
+    ],
+  },
+
   // ───────────────────────── Week of 5 October
   {
     type: "tip",
@@ -149,7 +219,6 @@ export const UPDATES: Item[] = [
     excerpt: "The official tour of what's new in the node-and-layer motion graphics app.",
     disciplines: ["motion"],
     date: "2026-10-04",
-    featured: true,
     meta: { maker: "Caddis", handle: "Caddis", youtubeId: "WQBUncz23Zs", url: "https://www.youtube.com/watch?v=WQBUncz23Zs", linkLabel: "Watch on YouTube" },
     sources: [{ name: "CG Channel", url: "https://www.cgchannel.com/2026/10/new-3d-software-you-may-have-missed-4-october-2026/" }],
     body: [
