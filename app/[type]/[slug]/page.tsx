@@ -188,6 +188,14 @@ export default async function DetailPage({ params }: { params: Promise<{ type: s
         ) : (
           <Cover item={item} className="detail-cover" large />
         )}
+        {item.image?.credit && (
+          <p className="photo-credit">
+            {item.meta?.youtubeId ? "Thumbnail: " : "Photo: "}
+            <a href={item.image.creditUrl} target="_blank" rel="noopener noreferrer">
+              {item.image.credit}
+            </a>
+          </p>
+        )}
         <div className="detail-layout">
           <Facts item={item} />
           <div className="prose" id="article-body">

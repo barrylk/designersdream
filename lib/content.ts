@@ -1,5 +1,6 @@
 import { NEWS } from "./news";
 import { PATCHES, UPDATES } from "./updates";
+import { PHOTOS } from "./photos";
 
 export type TypeKey = "news" | "article" | "tip" | "software" | "ai-model" | "video";
 export type DisciplineKey = "ui-ux" | "graphic" | "motion" | "3d" | "web" | "brand";
@@ -46,8 +47,8 @@ export type Item = {
   date: string; // ISO date published on DesignersDream
   featured?: boolean;
   readMins?: number;
-  /** Original cover art in /public/art (generated for us, no third-party photos). */
-  image?: { src: string; alt: string };
+  /** Real photograph in /public/photos, with a credit link (Unsplash or the video's YouTube thumbnail). */
+  image?: { src: string; alt: string; credit?: string; creditUrl?: string };
   /** Byline. Articles and news default to Barry. */
   author?: "barry";
   /** Outlets we learned the story from; always credited and linked on the page. */
@@ -686,8 +687,20 @@ const RAW_ITEMS: Item[] = [
 export const ITEMS: Item[] = RAW_ITEMS.map((raw) => {
   const p = PATCHES[raw.slug];
   const i = p ? { ...raw, date: p.date ?? raw.date, body: [...(raw.body ?? []), ...p.appendBody], sources: [...(raw.sources ?? []), ...p.sources] } : raw;
-  return i.type === "article" || i.type === "news" ? { ...i, author: i.author ?? "barry" } : i;
+  const photo = PHOTOS[i.slug];
+  const withPhoto = photo ? { ...i, image: photo } : i;
+  return withPhoto.type === "article" || withPhoto.type === "news" ? { ...withPhoto, author: withPhoto.author ?? "barry" } : withPhoto;
 });
+
+/** Photographs for the six discipline swatches. */
+export const DISCIPLINE_PHOTOS: Record<DisciplineKey, (typeof PHOTOS)[string]> = {
+  "ui-ux": PHOTOS["disc-ui-ux"],
+  graphic: PHOTOS["disc-graphic"],
+  motion: PHOTOS["disc-motion"],
+  "3d": PHOTOS["disc-3d"],
+  web: PHOTOS["disc-web"],
+  brand: PHOTOS["disc-brand"],
+};
 
 export const byDate = (a: Item, b: Item) => b.date.localeCompare(a.date);
 export const itemsOfType = (t: TypeKey) => ITEMS.filter((i) => i.type === t).sort(byDate);

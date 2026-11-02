@@ -233,7 +233,7 @@ export default function Cover({ item, className = "", large = false }: { item: I
         <img
           className="cover-img"
           src={large ? `${base}.webp` : `${base}-800.webp`}
-          srcSet={`${base}-800.webp 800w, ${base}.webp 1440w`}
+          srcSet={`${base}-800.webp 800w, ${base}.webp 1600w`}
           sizes={large ? "(max-width: 900px) 100vw, 1320px" : "(max-width: 640px) 100vw, 420px"}
           alt={item.image.alt}
           loading={large ? "eager" : "lazy"}

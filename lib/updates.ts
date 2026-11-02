@@ -5,6 +5,121 @@ import type { Item } from "./content";
  * Each entry ties back to something that just happened and links its sources.
  */
 export const UPDATES: Item[] = [
+  // ───────────────────────── Weeks of 8 October – 2 November
+  {
+    type: "tip",
+    slug: "write-your-first-design-spec",
+    title: "Write a one-page design spec an AI agent can follow",
+    excerpt: "Figma's new Specs are only as good as what you write in them. Start with these five headings.",
+    disciplines: ["ui-ux", "web"],
+    date: "2026-10-16",
+    meta: { tool: "Figma Specs, or any Markdown doc" },
+    sources: [{ name: "TechCrunch", url: "https://techcrunch.com/2026/10/14/figma-announces-new-features-to-define-how-agents-work-on-its-platform/" }],
+    body: [
+      "1. **Spacing**: your base unit and the steps you allow (for example 4, 8, 16, 24, 32).",
+      "2. **Type**: which styles to use for headings, body and captions, and which never to use.",
+      "3. **Colour**: what each colour means, not just its hex value. ‘Red is only for errors’ is a rule an agent can follow.",
+      "4. **Components**: when to use each one, with one ‘do’ and one ‘don't’.",
+      "5. **Voice**: three words for tone, plus a sentence you'd never write.",
+      "Keep each rule to one line. If a person can't follow it quickly, an agent will misread it.",
+    ],
+  },
+  {
+    type: "tip",
+    slug: "label-ai-images-honestly",
+    title: "Check AI product images against the real thing",
+    excerpt: "Just Eat's menu mishap is a reminder: any image that promises what a customer gets needs a human check.",
+    disciplines: ["brand", "ui-ux"],
+    date: "2026-10-27",
+    meta: { tool: "Any" },
+    sources: [{ name: "Creative Bloq", url: "https://www.creativebloq.com/news/just-eats-ai-apocalypse-raises-a-pretty-obvious-question" }],
+    body: [
+      "1. Read every product name out loud and ask: could this be taken literally? ‘Jacket potato’, ‘lighter’ and ‘tiger prawn’ all could.",
+      "2. Put the generated image next to a real photo of the product. Portion size, colour and garnish should match.",
+      "3. Label illustrative images as illustrative, in the interface and not just the terms.",
+      "4. Keep a quick way to swap a bad image for a placeholder without a new release.",
+    ],
+  },
+  {
+    type: "tip",
+    slug: "balance-two-scripts",
+    title: "Balance two scripts in one logo",
+    excerpt: "Inspired by Pentagram's Design Doha identity: four checks for bilingual wordmarks that don't favour one language.",
+    disciplines: ["brand", "graphic"],
+    date: "2026-10-21",
+    meta: { tool: "Any" },
+    sources: [{ name: "Creative Boom", url: "https://www.creativeboom.com/news/pentagrams-festival-identity-finds-a-clever-way-to-give-arabic-and-english-equal-billing/" }],
+    body: [
+      "1. Match stroke weight first. Different weights make one script look louder whatever the size.",
+      "2. Compare visual size, not point size. Scripts with different x-heights need different sizes to look equal.",
+      "3. Try side by side before stacking. Stacking always implies an order.",
+      "4. Ask a native reader of each script to check spacing and joins. Mistakes that are invisible to you are obvious to them.",
+    ],
+  },
+  {
+    type: "tip",
+    slug: "try-a-blender-beta-safely",
+    title: "Try a Blender beta without risking client files",
+    excerpt: "Blender 5.3 lands on 10 November. Here's how to test the beta now and keep your real projects safe.",
+    disciplines: ["3d", "motion"],
+    date: "2026-10-31",
+    meta: { tool: "Blender" },
+    sources: [{ name: "Blender", url: "https://www.blender.org/releases/5-3/" }],
+    body: [
+      "1. Download the portable (zip) build, so it doesn't replace your installed version.",
+      "2. Work on copies of your .blend files in a separate folder.",
+      "3. Don't save over a file you'll need to open in 5.2 LTS. Newer files don't always open in older versions.",
+      "4. Turn off add-on auto-updates in the beta, so an add-on doesn't update itself for both versions.",
+    ],
+  },
+  {
+    type: "ai-model",
+    slug: "canva-craft",
+    title: "Canva Craft",
+    excerpt: "Canva's first in-house image model. It plans the layout before generating and is trained on human-made designs, not photos.",
+    disciplines: ["graphic", "brand"],
+    date: "2026-10-23",
+    featured: true,
+    meta: { maker: "Canva", modality: "Image", pricing: "Included in Canva (Dream Lab); API coming", url: "https://www.canva.com/", linkLabel: "Open Canva" },
+    sources: [{ name: "TechCrunch", url: "https://techcrunch.com/2026/10/22/canva-releases-its-first-image-generation-model/" }],
+    body: [
+      "Craft generates images in two steps: first a plan of layout, scale, hierarchy and text, then the picture itself.",
+      "## Highlights",
+      "- Readable text in images.",
+      "- Up to 2K output in 30 aspect ratios.",
+      "- Results can be turned into editable layered designs with Magic Layers.",
+      "## Good for",
+      "- Social graphics, posters and menus where text matters.",
+    ],
+  },
+  {
+    type: "video",
+    slug: "figma-config-india-2026-keynote",
+    title: "Config India 2026 keynote with Dylan Field",
+    excerpt: "Figma's launch keynote: Specs, design system context, code layers and the agent on canvas.",
+    disciplines: ["ui-ux", "web"],
+    date: "2026-10-15",
+    featured: true,
+    meta: { maker: "Figma", handle: "Figma", youtubeId: "CXAvPycESVY", url: "https://www.youtube.com/watch?v=CXAvPycESVY", linkLabel: "Watch on YouTube" },
+    sources: [{ name: "TechCrunch", url: "https://techcrunch.com/2026/10/14/figma-announces-new-features-to-define-how-agents-work-on-its-platform/" }],
+    body: [
+      "The official keynote from Config India. Watch the Specs section first: it shows how written design rules sit next to the canvas and guide the agent.",
+    ],
+  },
+  {
+    type: "video",
+    slug: "blender-5-3-every-new-feature",
+    title: "Blender 5.3: every new feature in five minutes",
+    excerpt: "A fast tour of the 5.3 beta, from Gaussian splats to the reworked video editor.",
+    disciplines: ["3d", "motion"],
+    date: "2026-10-30",
+    meta: { maker: "Armin", handle: "Armin", youtubeId: "aWr6PQc12HY", url: "https://www.youtube.com/watch?v=aWr6PQc12HY", linkLabel: "Watch on YouTube" },
+    sources: [{ name: "Blender", url: "https://www.blender.org/releases/5-3/" }],
+    body: [
+      "A quick overview of what's in the Blender 5.3 beta before it's released on 10 November. Good for deciding which features to try first.",
+    ],
+  },
+
   // ───────────────────────── Week of 7 October
   {
     type: "tip",
@@ -66,7 +181,6 @@ export const UPDATES: Item[] = [
     excerpt: "Houdini timelapses of a wrecked Statue of Liberty and Empire State Building, built from 2010 Street View reference.",
     disciplines: ["3d", "motion"],
     date: "2026-10-07",
-    featured: true,
     meta: { maker: "Framestore", handle: "Framestore", youtubeId: "D4glDY4I2hc", url: "https://www.youtube.com/watch?v=D4glDY4I2hc", linkLabel: "Watch on YouTube" },
     sources: [{ name: "CG Channel", url: "https://www.cgchannel.com/2026/10/see-framestores-detailed-vfx-breakdown-for-dead-city-season-3/" }],
     body: [
@@ -193,7 +307,6 @@ export const UPDATES: Item[] = [
     excerpt: "Lightricks' open-weights video model, now with VFX tools for alpha mattes, HDR output and turning 3D blockouts into finished shots.",
     disciplines: ["motion", "3d"],
     date: "2026-10-04",
-    featured: true,
     meta: { maker: "Lightricks", modality: "Video", pricing: "Open weights free; LTX Studio uses credits", url: "https://ltx.io/model/ltx-2-5", linkLabel: "Visit ltx.io" },
     sources: [
       { name: "CG Channel", url: "https://www.cgchannel.com/2026/10/new-3d-software-you-may-have-missed-4-october-2026/" },
@@ -507,17 +620,32 @@ export const UPDATES: Item[] = [
 
 /** Additions to existing entries so they reflect this month's news. */
 export const PATCHES: Record<string, { date?: string; appendBody: string[]; sources: { name: string; url: string }[] }> = {
-  blender: {
-    date: "2026-09-30",
+  figma: {
+    date: "2026-10-15",
     appendBody: [
+      "## New from Config India (October 2026)",
+      "Specs, a Markdown editor for design rules that people and agents can follow; design system context that gathers libraries and guidelines in one place; code layers in public beta; and the agent on canvas for more users.",
+    ],
+    sources: [{ name: "TechCrunch", url: "https://techcrunch.com/2026/10/14/figma-announces-new-features-to-define-how-agents-work-on-its-platform/" }],
+  },
+  blender: {
+    date: "2026-10-31",
+    appendBody: [
+      "## Coming in 5.3 (expected 10 November 2026)",
+      "Gaussian Splatting support, DLSS denoising, Blender Projects, EEVEE Material Lighting nodes, dispersion in Cycles, OpenTimelineIO support and a reworked Video Sequencer.",
       "## New in 5.2 LTS",
       "Blender 5.2 is a long-term support release, supported until July 2028. Highlights include audio-reactive geometry nodes, node-based cloth and hair physics, a Mesh Bevel node and faster EEVEE in instance-heavy scenes.",
     ],
-    sources: [{ name: "Blender 5.2 release notes", url: "https://www.blender.org/download/releases/5-2/" }],
+    sources: [
+      { name: "Blender 5.2 release notes", url: "https://www.blender.org/download/releases/5-2/" },
+      { name: "Blender 5.3", url: "https://www.blender.org/releases/5-3/" },
+    ],
   },
   midjourney: {
-    date: "2026-09-25",
+    date: "2026-10-09",
     appendBody: [
+      "## October: Thinking Mode and shared folders",
+      "A ‘Rerun (Thinking)’ option re-reads your prompt for missed details, and shared folders let teams collect images together.",
       "## New this month",
       "The V8.2 edit model lets you change an image with a plain instruction, including inpainting and outpainting, with up to four reference images. The Styles sidebar can now preview your prompt across styles before you generate.",
     ],

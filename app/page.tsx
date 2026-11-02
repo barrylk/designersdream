@@ -10,6 +10,7 @@ import Subscribe from "@/components/Subscribe";
 import { ADSENSE_SLOTS } from "@/lib/site";
 import {
   DISCIPLINES,
+  DISCIPLINE_PHOTOS,
   disciplineByKey,
   itemHref,
   itemsOfDiscipline,
@@ -104,7 +105,9 @@ export default function Home() {
           <div className="swatches">
             {DISCIPLINES.map((d) => (
               <Link key={d.key} href={`/discipline/${d.key}/`} className="swatch">
-                <span className="swatch-chip" style={{ ["--c" as string]: d.color }} />
+                <span className="swatch-chip swatch-photo" style={{ ["--c" as string]: d.color }}>
+                  <img src={DISCIPLINE_PHOTOS[d.key].src.replace(/\.webp$/, "-800.webp")} alt={DISCIPLINE_PHOTOS[d.key].alt} loading="lazy" decoding="async" />
+                </span>
                 <span className="swatch-body">
                   <span className="swatch-name">{d.name}</span>
                   <span className="swatch-hex">{d.color}</span>
